@@ -10,6 +10,42 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 
+
+const appData = require("../data.json")
+const express = require('express')
+
+const seller = appData.seller;
+const goods = appData.goods;
+const ratings = appData.ratings;
+var app = express();
+var apiRoutes = express.Router();
+apiRoutes.get('/seller',function(req,res){
+  // res.json({
+  //     errno:0,
+  //     data:"XXXXX",
+  // });
+
+  
+});
+
+apiRoutes.get('/goods',function(req,res){
+  res.json({
+      errno:0,
+      data:goods
+  });
+});
+
+apiRoutes.get('/ratinds',function(req,res){
+  res.json({
+      errno:0,
+      data:ratinds
+  });
+});
+
+app.use('/api',apiRoutes);
+
+
+
 const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
@@ -25,7 +61,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     clientLogLevel: 'warning',
     historyApiFallback: {
       rewrites: [
-        { from: /.*/, to: path.join(config.dev.assetsPublicPath, 'index.html') },
+        // { from: /.*/, to: path.join(config.dev.assetsPublicPath, 'index.html') },
       ],
     },
     hot: true,
